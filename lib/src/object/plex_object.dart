@@ -1,5 +1,4 @@
-import "package:meta/meta.dart";
-import "package:dart_plex_api/dart_plex_api.dart";
+import 'package:dart_plex_api/dart_plex_api.dart';
 
 /// Marker class
 abstract class PlexObject {
@@ -7,17 +6,16 @@ abstract class PlexObject {
   final PlexConnection connection;
 
   PlexObject({
-    @required this.connection,
-  }) : assert(connection != null);
+    required this.connection,
+  });
 
   PlexObject.fromJson({
-    @required this.connection,
-    @required dynamic json,
-  })  : assert(connection != null),
-        assert(json != null);
+    required this.connection,
+    required dynamic json,
+  }) : assert(json != null);
 
   Map<String, dynamic> toJson();
 
   @override
-  String toString() => this.toJson().toString();
+  String toString() => toJson().toString();
 }

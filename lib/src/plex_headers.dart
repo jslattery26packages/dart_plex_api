@@ -1,5 +1,4 @@
-import "package:meta/meta.dart";
-import "package:dart_plex_api/dart_plex_api.dart";
+import 'package:dart_plex_api/dart_plex_api.dart';
 
 class PlexHeaders {
   /// X-Plex-Platform	(Platform name, eg iOS, MacOSX, Android, LG, etc)
@@ -33,53 +32,52 @@ class PlexHeaders {
   String accept;
 
   /// Authorization
-  String authorization;
+  String? authorization;
 
   PlexHeaders({
-    @required this.clientIdentifier,
-    this.platform = "",
-    this.platformVersion = "",
-    this.provides = "",
-    this.product = "",
-    this.version = "",
-    this.device = "",
-    this.containerSize = "",
-    this.token = "",
-    this.accept = "application/json",
-    this.authorization = "",
-  }) : assert(clientIdentifier != null && clientIdentifier != "");
+    required this.clientIdentifier,
+    this.platform = '',
+    this.platformVersion = '',
+    this.provides = '',
+    this.product = '',
+    this.version = '',
+    this.device = '',
+    this.containerSize = '',
+    this.token = '',
+    this.accept = 'application/json',
+    this.authorization = '',
+  }) : assert(clientIdentifier != '');
 
   PlexHeaders.fromCredentials({
-    @required PlexCredentials credentials,
-    @required this.clientIdentifier,
-    this.platform = "",
-    this.platformVersion = "",
-    this.provides = "",
-    this.product = "",
-    this.version = "",
-    this.device = "",
-    this.containerSize = "",
-    this.token = "",
-    this.accept = "application/json",
-  })  : assert(credentials != null),
-        assert(clientIdentifier != null && clientIdentifier != "") {
+    required PlexCredentials credentials,
+    required this.clientIdentifier,
+    this.platform = '',
+    this.platformVersion = '',
+    this.provides = '',
+    this.product = '',
+    this.version = '',
+    this.device = '',
+    this.containerSize = '',
+    this.token = '',
+    this.accept = 'application/json',
+  }) : assert(clientIdentifier != '') {
     setCredentials(credentials);
   }
 
   void setCredentials(PlexCredentials credentials) =>
-      this.authorization = credentials.basicAuthHeader;
+      authorization = credentials.basicAuthHeader;
 
   Map<String, String> toMap() => {
-        "X-Plex-Platform": this.platform,
-        "X-Plex-Platform-Version": this.platformVersion,
-        "X-Plex-Provides": this.provides,
-        "X-Plex-Client-Identifier": this.clientIdentifier,
-        "X-Plex-Product": this.product,
-        "X-Plex-Version": this.version,
-        "X-Plex-Device": this.device,
-        "X-Plex-Container-Size": this.containerSize,
-        "X-Plex-Token": this.token,
-        "Accept": this.accept,
-        "Authorization": this.authorization,
+        'X-Plex-Platform': platform,
+        'X-Plex-Platform-Version': platformVersion,
+        'X-Plex-Provides': provides,
+        'X-Plex-Client-Identifier': clientIdentifier,
+        'X-Plex-Product': product,
+        'X-Plex-Version': version,
+        'X-Plex-Device': device,
+        'X-Plex-Container-Size': containerSize,
+        'X-Plex-Token': token,
+        'Accept': accept,
+        'Authorization': authorization ?? '',
       };
 }
