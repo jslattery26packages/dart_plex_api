@@ -19,6 +19,15 @@ PlexCredentials credentials = PlexCredentials(
     username: "<USERNAME>",
     password: "<PASSWORD>",
   );
+  PlexHeaders headers = PlexHeaders(
+    clientIdentifier: "Plex Dart Client",
+  );
+  PlexConnection connection = await PlexConnection(
+    host: "127.0.0.1",
+    port: 32400,
+    credentials: credentials,
+    headers: headers,
+  ).authorize();
 ```
 
 2. Create a `PlexHeaders` object with, at least, an identifier for your client.
@@ -27,6 +36,12 @@ PlexCredentials credentials = PlexCredentials(
 PlexHeaders headers = PlexHeaders(
     clientIdentifier: "Plex Dart Client",
   );
+  PlexConnection connection = await PlexConnection(
+    host: "127.0.0.1",
+    port: 32400,
+    credentials: credentials,
+    headers: headers,
+  ).authorize();
 ```
 
 3. Finally, create a `PlexConnection` object passing the previous 2 objects. Be sure to call the asynchronous `authorize` method to ensure a safe connection.

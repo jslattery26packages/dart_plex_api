@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:dart_plex_api/dart_plex_api.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class PlexConnection {
   late PlexAuthorization _auth;
@@ -48,16 +46,24 @@ class PlexConnection {
         port: port,
       );
 
-  Future<dynamic> requestJson(String route) async =>
-      json.decode((await http.get(
-        requestUri.replace(path: route),
-        headers: headers!.toMap(),
-      ))
-          .body);
+  Future<dynamic> requestJson(String route) async {
+    final response = await Dio().getUri(
+      requestUri.replace(
+        path: route,
+        queryParameters: {'X-Plex-Token': headers!.token},
+      ),
+      options: Options(
+        headers: {'Accept': 'application/json'},
+      ),
+    );
+    return response.data;
+  }
 
-  Future<http.Response> requestRaw(String route) async => await http.get(
+  Future<Response> requestRaw(String route) async => await Dio().getUri(
         requestUri.replace(path: route),
-        headers: headers!.toMap(),
+        options: Options(
+          headers: headers!.toMap(),
+        ),
       );
 
   PlexRootRoute get root => PlexRootRoute(

@@ -3,7 +3,7 @@ import 'package:dart_plex_api/dart_plex_api.dart';
 class PlexClientsRoute extends PlexRoute {
   PlexClientsRoute({
     required PlexConnection connection,
-    String? previousPath,
+    String previousPath = '',
   }) : super(
           connection: connection,
           path: PlexLibrary.route,

@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:dart_plex_api/dart_plex_api.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class PlexAuthorization {
   final Uri _authEndpoint = Uri.https('plex.tv', '/users/sign_in.json');
@@ -18,12 +16,14 @@ class PlexAuthorization {
   }
 
   Future<dynamic> authorize() async {
-    var response = await http.post(
+    var response = await Dio().postUri(
       _authEndpoint,
-      headers: headers.toMap(),
+      options: Options(
+        headers: headers.toMap(),
+      ),
     );
 
-    dynamic result = json.decode(response.body);
+    dynamic result = response.data;
 
     var error = result['error'];
 

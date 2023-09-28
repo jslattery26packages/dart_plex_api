@@ -7,7 +7,7 @@ class PlexLibrarySectionRoute extends PlexRoute {
     required PlexConnection connection,
     required String key,
     required this.typeString,
-    String? previousPath,
+    String previousPath = '',
   })  : assert(key != ''),
         super(
           connection: connection,
@@ -24,6 +24,7 @@ class PlexLibrarySectionRoute extends PlexRoute {
 
     try {
       type = PlexMediaType.fromTypeString(type: typeString);
+      print(type);
     } finally {
       switch (type.runtimeType) {
         case PlexArtist:

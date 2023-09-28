@@ -6,7 +6,7 @@ class PlexAllLibrarySectionsRoute extends PlexRoute {
   PlexAllLibrarySectionsRoute({
     required PlexConnection connection,
     required this.indexRoute,
-    String? previousPath,
+    String previousPath = '',
   }) : super(
           connection: connection,
           path: '',

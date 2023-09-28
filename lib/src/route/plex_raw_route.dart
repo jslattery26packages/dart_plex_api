@@ -4,7 +4,7 @@ class PlexRawRoute extends PlexRoute {
   PlexRawRoute({
     required PlexConnection connection,
     required String path,
-    String? previousPath,
+    String previousPath = '',
   }) : super(
           connection: connection,
           path: path,
